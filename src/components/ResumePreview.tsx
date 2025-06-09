@@ -22,47 +22,31 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
 
   return (
     <div id="resume-preview" className="bg-white shadow-lg rounded-lg overflow-hidden max-w-2xl mx-auto">
-      <div 
-        className="p-8" 
-        style={{ 
-          fontFamily: 'Arial, sans-serif !important', 
-          lineHeight: '1.4', 
-          color: '#000000 !important',
-          backgroundColor: '#ffffff',
-          fontSize: '14px'
-        }}
-      >
+      <div className="p-8" style={{ fontFamily: 'Arial, sans-serif', lineHeight: '1.4', color: '#000000' }}>
         {/* Header - ATS Optimized */}
         <div className="mb-8">
           <h1 style={{ 
-            fontSize: '24px !important', 
-            fontWeight: 'bold !important', 
+            fontSize: '24px', 
+            fontWeight: 'bold', 
             marginBottom: '8px',
-            color: '#000000 !important',
-            textAlign: 'left',
-            fontFamily: 'Arial, sans-serif !important'
+            color: '#000000',
+            textAlign: 'left'
           }}>
             {resumeData.personalInfo.fullName || "Seu Nome Completo"}
           </h1>
           
           {resumeData.personalInfo.desiredPosition && (
             <div style={{ 
-              fontSize: '16px !important', 
-              fontWeight: 'normal !important',
+              fontSize: '16px', 
+              fontWeight: 'normal',
               marginBottom: '12px',
-              color: '#000000 !important',
-              fontFamily: 'Arial, sans-serif !important'
+              color: '#000000'
             }}>
               {resumeData.personalInfo.desiredPosition}
             </div>
           )}
           
-          <div style={{ 
-            fontSize: '14px !important', 
-            color: '#000000 !important', 
-            marginBottom: '4px',
-            fontFamily: 'Arial, sans-serif !important'
-          }}>
+          <div style={{ fontSize: '14px', color: '#000000', marginBottom: '4px' }}>
             {resumeData.personalInfo.email && (
               <span style={{ marginRight: '16px' }}>
                 Email: {resumeData.personalInfo.email}
@@ -76,11 +60,7 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
           </div>
           
           {resumeData.personalInfo.address && (
-            <div style={{ 
-              fontSize: '14px !important', 
-              color: '#000000 !important',
-              fontFamily: 'Arial, sans-serif !important'
-            }}>
+            <div style={{ fontSize: '14px', color: '#000000' }}>
               Endereço: {resumeData.personalInfo.address}
             </div>
           )}
@@ -90,23 +70,21 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
         {resumeData.professionalSummary && (
           <div className="mb-8">
             <h2 style={{ 
-              fontSize: '18px !important', 
-              fontWeight: 'bold !important', 
+              fontSize: '18px', 
+              fontWeight: 'bold', 
               marginBottom: '12px',
-              color: '#000000 !important',
+              color: '#000000',
               borderBottom: '1px solid #000000',
-              paddingBottom: '4px',
-              fontFamily: 'Arial, sans-serif !important'
+              paddingBottom: '4px'
             }}>
               RESUMO PROFISSIONAL
             </h2>
             <p style={{ 
-              fontSize: '14px !important', 
-              color: '#000000 !important', 
+              fontSize: '14px', 
+              color: '#000000', 
               lineHeight: '1.6',
               textAlign: 'justify',
-              margin: '0',
-              fontFamily: 'Arial, sans-serif !important'
+              margin: '0'
             }}>
               {resumeData.professionalSummary}
             </p>
@@ -117,13 +95,12 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
         {resumeData.experiences.length > 0 && (
           <div className="mb-8">
             <h2 style={{ 
-              fontSize: '18px !important', 
-              fontWeight: 'bold !important', 
+              fontSize: '18px', 
+              fontWeight: 'bold', 
               marginBottom: '12px',
-              color: '#000000 !important',
+              color: '#000000',
               borderBottom: '1px solid #000000',
-              paddingBottom: '4px',
-              fontFamily: 'Arial, sans-serif !important'
+              paddingBottom: '4px'
             }}>
               EXPERIÊNCIA PROFISSIONAL
             </h2>
@@ -132,28 +109,25 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
                 <div key={experience.id} style={{ marginBottom: index < resumeData.experiences.length - 1 ? '20px' : '0' }}>
                   <div style={{ marginBottom: '8px' }}>
                     <h3 style={{ 
-                      fontSize: '16px !important', 
-                      fontWeight: 'bold !important', 
+                      fontSize: '16px', 
+                      fontWeight: 'bold', 
                       margin: '0',
-                      color: '#000000 !important',
-                      fontFamily: 'Arial, sans-serif !important'
+                      color: '#000000'
                     }}>
                       {experience.position || "Cargo"}
                     </h3>
                     <div style={{ 
-                      fontSize: '14px !important', 
-                      fontWeight: 'bold !important',
-                      color: '#000000 !important',
-                      margin: '4px 0',
-                      fontFamily: 'Arial, sans-serif !important'
+                      fontSize: '14px', 
+                      fontWeight: 'bold',
+                      color: '#000000',
+                      margin: '4px 0'
                     }}>
                       {experience.company || "Nome da Empresa"}
                     </div>
                     <div style={{ 
-                      fontSize: '14px !important', 
-                      color: '#000000 !important',
-                      fontStyle: 'italic',
-                      fontFamily: 'Arial, sans-serif !important'
+                      fontSize: '14px', 
+                      color: '#000000',
+                      fontStyle: 'italic'
                     }}>
                       {experience.startDate && (
                         <>
@@ -166,11 +140,10 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
                   </div>
                   {experience.description && (
                     <div style={{ 
-                      fontSize: '14px !important', 
-                      color: '#000000 !important', 
+                      fontSize: '14px', 
+                      color: '#000000', 
                       lineHeight: '1.5',
-                      marginLeft: '16px',
-                      fontFamily: 'Arial, sans-serif !important'
+                      marginLeft: '16px'
                     }}>
                       <p style={{ margin: '0', textAlign: 'justify' }}>
                         • {experience.description}
@@ -187,13 +160,12 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
         {resumeData.education.length > 0 && (
           <div className="mb-8">
             <h2 style={{ 
-              fontSize: '18px !important', 
-              fontWeight: 'bold !important', 
+              fontSize: '18px', 
+              fontWeight: 'bold', 
               marginBottom: '12px',
-              color: '#000000 !important',
+              color: '#000000',
               borderBottom: '1px solid #000000',
-              paddingBottom: '4px',
-              fontFamily: 'Arial, sans-serif !important'
+              paddingBottom: '4px'
             }}>
               FORMAÇÃO ACADÊMICA
             </h2>
@@ -201,28 +173,25 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
               {resumeData.education.map((education, index) => (
                 <div key={education.id} style={{ marginBottom: index < resumeData.education.length - 1 ? '16px' : '0' }}>
                   <h3 style={{ 
-                    fontSize: '16px !important', 
-                    fontWeight: 'bold !important', 
+                    fontSize: '16px', 
+                    fontWeight: 'bold', 
                     margin: '0',
-                    color: '#000000 !important',
-                    fontFamily: 'Arial, sans-serif !important'
+                    color: '#000000'
                   }}>
                     {education.degree || "Grau"} em {education.fieldOfStudy || "Área de Estudo"}
                   </h3>
                   <div style={{ 
-                    fontSize: '14px !important', 
-                    fontWeight: 'bold !important',
-                    color: '#000000 !important',
-                    margin: '4px 0',
-                    fontFamily: 'Arial, sans-serif !important'
+                    fontSize: '14px', 
+                    fontWeight: 'bold',
+                    color: '#000000',
+                    margin: '4px 0'
                   }}>
                     {education.institution || "Nome da Instituição"}
                   </div>
                   <div style={{ 
-                    fontSize: '14px !important', 
-                    color: '#000000 !important',
-                    fontStyle: 'italic',
-                    fontFamily: 'Arial, sans-serif !important'
+                    fontSize: '14px', 
+                    color: '#000000',
+                    fontStyle: 'italic'
                   }}>
                     {education.startDate && (
                       <>
@@ -242,13 +211,12 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
         {resumeData.skills.length > 0 && (
           <div className="mb-8">
             <h2 style={{ 
-              fontSize: '18px !important', 
-              fontWeight: 'bold !important', 
+              fontSize: '18px', 
+              fontWeight: 'bold', 
               marginBottom: '12px',
-              color: '#000000 !important',
+              color: '#000000',
               borderBottom: '1px solid #000000',
-              paddingBottom: '4px',
-              fontFamily: 'Arial, sans-serif !important'
+              paddingBottom: '4px'
             }}>
               COMPETÊNCIAS E HABILIDADES
             </h2>
@@ -260,10 +228,9 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
                   marginBottom: '8px'
                 }}>
                   <span style={{ 
-                    fontSize: '14px !important',
-                    color: '#000000 !important',
-                    fontWeight: 'normal !important',
-                    fontFamily: 'Arial, sans-serif !important'
+                    fontSize: '14px',
+                    color: '#000000',
+                    fontWeight: 'normal'
                   }}>
                     {skill.name || "Habilidade"} ({skill.level})
                     {index < resumeData.skills.length - 1 ? " •" : ""}
@@ -284,8 +251,7 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
             textAlign: 'center', 
             padding: '48px 0', 
             color: '#666666',
-            fontSize: '14px !important',
-            fontFamily: 'Arial, sans-serif !important'
+            fontSize: '14px'
           }}>
             <p>Preencha os dados no formulário para ver seu currículo aqui</p>
           </div>

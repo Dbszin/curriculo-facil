@@ -9,78 +9,52 @@ export const exportToPDF = async (resumeData: ResumeData): Promise<void> => {
     throw new Error('Elemento de preview não encontrado');
   }
 
-  // Configurações otimizadas para garantir que o texto apareça no PDF
+  // Configurações otimizadas para ATS
   const opt = {
     margin: [0.5, 0.5, 0.5, 0.5],
     filename: `curriculo-${resumeData.personalInfo.fullName.replace(/\s+/g, '-').toLowerCase()}.pdf`,
     image: { 
       type: 'jpeg', 
-      quality: 0.98 
+      quality: 1.0 
     },
     html2canvas: { 
-      scale: 2,
+      scale: 4, // Máxima qualidade para texto nítido
       useCORS: true,
+      letterRendering: true,
       allowTaint: false,
       backgroundColor: '#ffffff',
       logging: false,
-      letterRendering: true,
-      // Configurações essenciais para capturar texto
-      removeContainer: true,
-      async: true,
-      allowTaint: true,
-      foreignObjectRendering: false, // Mudança importante - desabilitar para melhor compatibilidade de texto
-      imageTimeout: 15000,
-      onclone: (clonedDoc: Document) => {
-        // Garantir que todas as fontes sejam aplicadas no clone
-        const clonedElement = clonedDoc.getElementById('resume-preview');
-        if (clonedElement) {
-          clonedElement.style.fontFamily = 'Arial, sans-serif';
-          clonedElement.style.color = '#000000';
-          // Forçar renderização de texto
-          const allElements = clonedElement.querySelectorAll('*');
-          allElements.forEach((el: any) => {
-            if (el.style) {
-              el.style.fontFamily = 'Arial, sans-serif';
-              el.style.color = '#000000';
-            }
-          });
-        }
-      }
+      width: element.scrollWidth,
+      height: element.scrollHeight,
+      scrollX: 0,
+      scrollY: 0,
+      // Configurações para melhor qualidade de texto
+      dpi: 300,
+      foreignObjectRendering: true
     },
     jsPDF: { 
       unit: 'in', 
       format: 'a4', 
       orientation: 'portrait',
-      compress: true,
-      precision: 2
+      compress: false, // Não comprimir para manter qualidade do texto
+      precision: 16, // Máxima precisão
+      userUnit: 1.0
     },
+    // Configurações específicas para compatibilidade ATS
     pagebreak: { 
-      mode: ['avoid-all'],
+      mode: ['avoid-all', 'css', 'legacy'],
       before: '.page-break-before',
-      after: '.page-break-after'
+      after: '.page-break-after',
+      avoid: '.no-page-break'
     }
   };
 
   try {
-    console.log('Iniciando geração do PDF...');
-    
-    // Garantir que o elemento está visível antes da captura
-    const originalDisplay = element.style.display;
-    const originalVisibility = element.style.visibility;
-    
-    element.style.display = 'block';
-    element.style.visibility = 'visible';
-    
+    // Gerar PDF com configurações otimizadas para ATS usando a API correta
     await html2pdf()
       .set(opt)
       .from(element)
       .save();
-      
-    // Restaurar estilos originais
-    element.style.display = originalDisplay;
-    element.style.visibility = originalVisibility;
-    
-    console.log('PDF gerado com sucesso!');
   } catch (error) {
     console.error('Erro ao gerar PDF:', error);
     throw error;
