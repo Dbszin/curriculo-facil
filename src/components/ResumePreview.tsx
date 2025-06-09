@@ -1,6 +1,5 @@
 
 import { ResumeData } from "@/types/resume";
-import { Mail, Phone, MapPin } from "lucide-react";
 
 interface ResumePreviewProps {
   resumeData: ResumeData;
@@ -23,70 +22,113 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
 
   return (
     <div id="resume-preview" className="bg-white shadow-lg rounded-lg overflow-hidden max-w-2xl mx-auto">
-      <div className="p-8">
-        {/* Header */}
-        <div className="border-b border-gray-200 pb-6 mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {resumeData.personalInfo.fullName || "Seu Nome"}
+      <div className="p-8" style={{ fontFamily: 'Arial, sans-serif', lineHeight: '1.4', color: '#000000' }}>
+        {/* Header - ATS Optimized */}
+        <div className="mb-8">
+          <h1 style={{ 
+            fontSize: '24px', 
+            fontWeight: 'bold', 
+            marginBottom: '8px',
+            color: '#000000',
+            textAlign: 'left'
+          }}>
+            {resumeData.personalInfo.fullName || "Seu Nome Completo"}
           </h1>
+          
           {resumeData.personalInfo.desiredPosition && (
-            <h2 className="text-xl text-blue-600 font-medium mb-4">
+            <div style={{ 
+              fontSize: '16px', 
+              fontWeight: 'normal',
+              marginBottom: '12px',
+              color: '#000000'
+            }}>
               {resumeData.personalInfo.desiredPosition}
-            </h2>
+            </div>
           )}
-          <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+          
+          <div style={{ fontSize: '14px', color: '#000000', marginBottom: '4px' }}>
             {resumeData.personalInfo.email && (
-              <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4 flex-shrink-0" />
-                <span>{resumeData.personalInfo.email}</span>
-              </div>
+              <span style={{ marginRight: '16px' }}>
+                Email: {resumeData.personalInfo.email}
+              </span>
             )}
             {resumeData.personalInfo.phone && (
-              <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4 flex-shrink-0" />
-                <span>{resumeData.personalInfo.phone}</span>
-              </div>
-            )}
-            {resumeData.personalInfo.address && (
-              <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 flex-shrink-0" />
-                <span>{resumeData.personalInfo.address}</span>
-              </div>
+              <span style={{ marginRight: '16px' }}>
+                Telefone: {resumeData.personalInfo.phone}
+              </span>
             )}
           </div>
+          
+          {resumeData.personalInfo.address && (
+            <div style={{ fontSize: '14px', color: '#000000' }}>
+              Endereço: {resumeData.personalInfo.address}
+            </div>
+          )}
         </div>
 
-        {/* Professional Summary */}
+        {/* Professional Summary - ATS Section */}
         {resumeData.professionalSummary && (
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
-              Resumo Profissional
-            </h3>
-            <p className="text-gray-700 leading-relaxed text-justify">
+          <div className="mb-8">
+            <h2 style={{ 
+              fontSize: '18px', 
+              fontWeight: 'bold', 
+              marginBottom: '12px',
+              color: '#000000',
+              borderBottom: '1px solid #000000',
+              paddingBottom: '4px'
+            }}>
+              RESUMO PROFISSIONAL
+            </h2>
+            <p style={{ 
+              fontSize: '14px', 
+              color: '#000000', 
+              lineHeight: '1.6',
+              textAlign: 'justify',
+              margin: '0'
+            }}>
               {resumeData.professionalSummary}
             </p>
           </div>
         )}
 
-        {/* Experience */}
+        {/* Experience - ATS Optimized */}
         {resumeData.experiences.length > 0 && (
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-1">
-              Experiência Profissional
-            </h3>
-            <div className="space-y-4">
-              {resumeData.experiences.map((experience) => (
-                <div key={experience.id} className="border-l-2 border-blue-200 pl-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h4 className="font-semibold text-gray-900">
-                        {experience.position || "Cargo"}
-                      </h4>
-                      <p className="text-blue-600 font-medium">
-                        {experience.company || "Empresa"}
-                      </p>
+          <div className="mb-8">
+            <h2 style={{ 
+              fontSize: '18px', 
+              fontWeight: 'bold', 
+              marginBottom: '12px',
+              color: '#000000',
+              borderBottom: '1px solid #000000',
+              paddingBottom: '4px'
+            }}>
+              EXPERIÊNCIA PROFISSIONAL
+            </h2>
+            <div>
+              {resumeData.experiences.map((experience, index) => (
+                <div key={experience.id} style={{ marginBottom: index < resumeData.experiences.length - 1 ? '20px' : '0' }}>
+                  <div style={{ marginBottom: '8px' }}>
+                    <h3 style={{ 
+                      fontSize: '16px', 
+                      fontWeight: 'bold', 
+                      margin: '0',
+                      color: '#000000'
+                    }}>
+                      {experience.position || "Cargo"}
+                    </h3>
+                    <div style={{ 
+                      fontSize: '14px', 
+                      fontWeight: 'bold',
+                      color: '#000000',
+                      margin: '4px 0'
+                    }}>
+                      {experience.company || "Nome da Empresa"}
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div style={{ 
+                      fontSize: '14px', 
+                      color: '#000000',
+                      fontStyle: 'italic'
+                    }}>
                       {experience.startDate && (
                         <>
                           {formatDate(experience.startDate)} - {" "}
@@ -97,9 +139,16 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
                     </div>
                   </div>
                   {experience.description && (
-                    <p className="text-gray-700 text-sm leading-relaxed text-justify">
-                      {experience.description}
-                    </p>
+                    <div style={{ 
+                      fontSize: '14px', 
+                      color: '#000000', 
+                      lineHeight: '1.5',
+                      marginLeft: '16px'
+                    }}>
+                      <p style={{ margin: '0', textAlign: 'justify' }}>
+                        • {experience.description}
+                      </p>
+                    </div>
                   )}
                 </div>
               ))}
@@ -107,33 +156,50 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
           </div>
         )}
 
-        {/* Education */}
+        {/* Education - ATS Format */}
         {resumeData.education.length > 0 && (
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-1">
-              Formação
-            </h3>
-            <div className="space-y-3">
-              {resumeData.education.map((education) => (
-                <div key={education.id} className="border-l-2 border-green-200 pl-4">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h4 className="font-semibold text-gray-900">
-                        {education.degree || "Grau"} em {education.fieldOfStudy || "Curso"}
-                      </h4>
-                      <p className="text-green-600 font-medium">
-                        {education.institution || "Instituição"}
-                      </p>
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      {education.startDate && (
-                        <>
-                          {formatYearDate(education.startDate)} - {" "}
-                          {education.isCurrentStudy ? "Cursando" : 
-                            education.endDate ? formatYearDate(education.endDate) : ""}
-                        </>
-                      )}
-                    </div>
+          <div className="mb-8">
+            <h2 style={{ 
+              fontSize: '18px', 
+              fontWeight: 'bold', 
+              marginBottom: '12px',
+              color: '#000000',
+              borderBottom: '1px solid #000000',
+              paddingBottom: '4px'
+            }}>
+              FORMAÇÃO ACADÊMICA
+            </h2>
+            <div>
+              {resumeData.education.map((education, index) => (
+                <div key={education.id} style={{ marginBottom: index < resumeData.education.length - 1 ? '16px' : '0' }}>
+                  <h3 style={{ 
+                    fontSize: '16px', 
+                    fontWeight: 'bold', 
+                    margin: '0',
+                    color: '#000000'
+                  }}>
+                    {education.degree || "Grau"} em {education.fieldOfStudy || "Área de Estudo"}
+                  </h3>
+                  <div style={{ 
+                    fontSize: '14px', 
+                    fontWeight: 'bold',
+                    color: '#000000',
+                    margin: '4px 0'
+                  }}>
+                    {education.institution || "Nome da Instituição"}
+                  </div>
+                  <div style={{ 
+                    fontSize: '14px', 
+                    color: '#000000',
+                    fontStyle: 'italic'
+                  }}>
+                    {education.startDate && (
+                      <>
+                        {formatYearDate(education.startDate)} - {" "}
+                        {education.isCurrentStudy ? "Cursando" : 
+                          education.endDate ? formatYearDate(education.endDate) : ""}
+                      </>
+                    )}
                   </div>
                 </div>
               ))}
@@ -141,20 +207,33 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
           </div>
         )}
 
-        {/* Skills */}
+        {/* Skills - ATS Keyword Optimized */}
         {resumeData.skills.length > 0 && (
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-1">
-              Habilidades
-            </h3>
-            <div className="space-y-2">
-              {resumeData.skills.map((skill) => (
-                <div key={skill.id} className="flex items-center justify-between py-1">
-                  <span className="text-gray-700 font-medium flex-1">
-                    {skill.name || "Habilidade"}
-                  </span>
-                  <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full ml-4 flex-shrink-0">
-                    {skill.level}
+          <div className="mb-8">
+            <h2 style={{ 
+              fontSize: '18px', 
+              fontWeight: 'bold', 
+              marginBottom: '12px',
+              color: '#000000',
+              borderBottom: '1px solid #000000',
+              paddingBottom: '4px'
+            }}>
+              COMPETÊNCIAS E HABILIDADES
+            </h2>
+            <div>
+              {resumeData.skills.map((skill, index) => (
+                <div key={skill.id} style={{ 
+                  display: 'inline-block',
+                  marginRight: '8px',
+                  marginBottom: '8px'
+                }}>
+                  <span style={{ 
+                    fontSize: '14px',
+                    color: '#000000',
+                    fontWeight: 'normal'
+                  }}>
+                    {skill.name || "Habilidade"} ({skill.level})
+                    {index < resumeData.skills.length - 1 ? " •" : ""}
                   </span>
                 </div>
               ))}
@@ -168,7 +247,12 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
          resumeData.experiences.length === 0 && 
          resumeData.education.length === 0 && 
          resumeData.skills.length === 0 && (
-          <div className="text-center py-12 text-gray-500">
+          <div style={{ 
+            textAlign: 'center', 
+            padding: '48px 0', 
+            color: '#666666',
+            fontSize: '14px'
+          }}>
             <p>Preencha os dados no formulário para ver seu currículo aqui</p>
           </div>
         )}
