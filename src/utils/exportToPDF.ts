@@ -12,16 +12,27 @@ export const exportToPDF = async (resumeData: ResumeData): Promise<void> => {
   const opt = {
     margin: [0.5, 0.5, 0.5, 0.5],
     filename: `curriculo-${resumeData.personalInfo.fullName.replace(/\s+/g, '-').toLowerCase()}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
+    image: { 
+      type: 'jpeg', 
+      quality: 1.0 
+    },
     html2canvas: { 
-      scale: 2,
+      scale: 3,
       useCORS: true,
-      letterRendering: true
+      letterRendering: true,
+      allowTaint: false,
+      backgroundColor: '#ffffff',
+      logging: false,
+      width: element.scrollWidth,
+      height: element.scrollHeight,
+      scrollX: 0,
+      scrollY: 0
     },
     jsPDF: { 
       unit: 'in', 
       format: 'a4', 
-      orientation: 'portrait' 
+      orientation: 'portrait',
+      compress: false
     }
   };
 

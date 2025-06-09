@@ -37,19 +37,19 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
           <div className="flex flex-wrap gap-4 text-sm text-gray-600">
             {resumeData.personalInfo.email && (
               <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
+                <Mail className="h-4 w-4 flex-shrink-0" />
                 <span>{resumeData.personalInfo.email}</span>
               </div>
             )}
             {resumeData.personalInfo.phone && (
               <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
+                <Phone className="h-4 w-4 flex-shrink-0" />
                 <span>{resumeData.personalInfo.phone}</span>
               </div>
             )}
             {resumeData.personalInfo.address && (
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" />
+                <MapPin className="h-4 w-4 flex-shrink-0" />
                 <span>{resumeData.personalInfo.address}</span>
               </div>
             )}
@@ -62,7 +62,7 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
             <h3 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
               Resumo Profissional
             </h3>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 leading-relaxed text-justify">
               {resumeData.professionalSummary}
             </p>
           </div>
@@ -97,7 +97,7 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
                     </div>
                   </div>
                   {experience.description && (
-                    <p className="text-gray-700 text-sm leading-relaxed">
+                    <p className="text-gray-700 text-sm leading-relaxed text-justify">
                       {experience.description}
                     </p>
                   )}
@@ -147,13 +147,13 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
             <h3 className="text-lg font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-1">
               Habilidades
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="space-y-2">
               {resumeData.skills.map((skill) => (
-                <div key={skill.id} className="flex justify-between items-center">
-                  <span className="text-gray-700 font-medium">
+                <div key={skill.id} className="flex items-center justify-between py-1">
+                  <span className="text-gray-700 font-medium flex-1">
                     {skill.name || "Habilidade"}
                   </span>
-                  <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                  <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full ml-4 flex-shrink-0">
                     {skill.level}
                   </span>
                 </div>
