@@ -50,23 +50,10 @@ export const exportToPDF = async (resumeData: ResumeData): Promise<void> => {
   };
 
   try {
-    // Gerar PDF com configurações otimizadas para ATS
+    // Gerar PDF com configurações otimizadas para ATS usando a API correta
     await html2pdf()
       .set(opt)
       .from(element)
-      .toPdf()
-      .get('pdf')
-      .then((pdf: any) => {
-        // Configurações adicionais do PDF para compatibilidade ATS
-        pdf.setProperties({
-          title: `Currículo - ${resumeData.personalInfo.fullName}`,
-          subject: 'Currículo Profissional',
-          author: resumeData.personalInfo.fullName,
-          keywords: 'curriculo, cv, resume, profissional',
-          creator: 'CurriculoFacil',
-          producer: 'CurriculoFacil ATS Optimized'
-        });
-      })
       .save();
   } catch (error) {
     console.error('Erro ao gerar PDF:', error);
