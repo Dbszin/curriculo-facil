@@ -9,52 +9,40 @@ export const exportToPDF = async (resumeData: ResumeData): Promise<void> => {
     throw new Error('Elemento de preview não encontrado');
   }
 
-  // Configurações otimizadas para ATS
+  // Configurações otimizadas para capturar texto corretamente
   const opt = {
-    margin: [0.5, 0.5, 0.5, 0.5],
+    margin: 0.5,
     filename: `curriculo-${resumeData.personalInfo.fullName.replace(/\s+/g, '-').toLowerCase()}.pdf`,
     image: { 
       type: 'jpeg', 
-      quality: 1.0 
+      quality: 0.98 
     },
     html2canvas: { 
-      scale: 4, // Máxima qualidade para texto nítido
+      scale: 2,
       useCORS: true,
-      letterRendering: true,
       allowTaint: false,
       backgroundColor: '#ffffff',
       logging: false,
+      letterRendering: true,
+      // Configurações específicas para capturar texto
       width: element.scrollWidth,
       height: element.scrollHeight,
       scrollX: 0,
-      scrollY: 0,
-      // Configurações para melhor qualidade de texto
-      dpi: 300,
-      foreignObjectRendering: true
+      scrollY: 0
     },
     jsPDF: { 
       unit: 'in', 
       format: 'a4', 
-      orientation: 'portrait',
-      compress: false, // Não comprimir para manter qualidade do texto
-      precision: 16, // Máxima precisão
-      userUnit: 1.0
-    },
-    // Configurações específicas para compatibilidade ATS
-    pagebreak: { 
-      mode: ['avoid-all', 'css', 'legacy'],
-      before: '.page-break-before',
-      after: '.page-break-after',
-      avoid: '.no-page-break'
+      orientation: 'portrait'
     }
   };
 
   try {
-    // Gerar PDF com configurações otimizadas para ATS usando a API correta
-    await html2pdf()
-      .set(opt)
-      .from(element)
-      .save();
+    // Garantir que o elemento esteja visível antes da conversão
+    element.style.display = 'block';
+    element.style.visibility = 'visible';
+    
+    await html2pdf().set(opt).from(element).save();
   } catch (error) {
     console.error('Erro ao gerar PDF:', error);
     throw error;
