@@ -179,7 +179,7 @@ const Index = () => {
             </div>
             <span className="font-medium text-foreground">CurrículoFácil</span>
           </div>
-          <p className="text-muted-foreground text-sm">&copy; 2024 CurrículoFácil. Ferramenta gratuita para criação de currículos.</p>
+          <p className="text-muted-foreground text-sm">&copy; 2025 CurrículoFácil. Ferramenta gratuita para criação de currículos.</p>
         </div>
       </footer>
     </div>

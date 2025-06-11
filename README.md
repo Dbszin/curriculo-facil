@@ -1,73 +1,64 @@
-# Welcome to your Lovable project
+# Currículo Fácil
 
-## Project info
+Um gerador de currículos moderno e intuitivo que permite criar currículos profissionais em PDF de forma rápida e fácil.
 
-**URL**: https://lovable.dev/projects/c82ab099-2ec4-4aa9-bd29-e7bf9e3a0963
+## Funcionalidades
 
-## How can I edit this code?
+- Interface moderna e responsiva
+- Templates profissionais e personalizáveis
+- Exportação para PDF
+- Suporte a temas claro/escuro
+- Editor em tempo real
+- Salvamento automático
+- Compatível com dispositivos móveis
 
-There are several ways of editing your application.
+## Tecnologias
 
-**Use Lovable**
+- [Vite](https://vitejs.dev/) - Build tool e servidor de desenvolvimento
+- [React](https://reactjs.org/) - Biblioteca JavaScript para interfaces
+- [TypeScript](https://www.typescriptlang.org/) - Superset JavaScript com tipagem
+- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS utilitário
+- [shadcn/ui](https://ui.shadcn.com/) - Componentes de UI reutilizáveis
+- [React Router](https://reactrouter.com/) - Roteamento
+- [React Query](https://tanstack.com/query) - Gerenciamento de estado e cache
+- [React Hook Form](https://react-hook-form.com/) - Formulários
+- [Zod](https://zod.dev/) - Validação de dados
+- [date-fns](https://date-fns.org/) - Manipulação de datas
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c82ab099-2ec4-4aa9-bd29-e7bf9e3a0963) and start prompting.
+## Como Usar
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/curriculo-facil.git
+cd curriculo-facil
+```
 
-**Use your preferred IDE**
+2. Instale as dependências:
+```bash
+npm install
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Inicie o servidor de desenvolvimento:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Acesse `http://localhost:8080` no seu navegador
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Como Contribuir
 
-**Use GitHub Codespaces**
+1. Faça um Fork do projeto
+2. Crie uma Branch para sua Feature (`git checkout -b feature/AmazingFeature`)
+3. Faça o Commit das suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Faça o Push para a Branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Licença
 
-## What technologies are used for this project?
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-This project is built with:
+## Agradecimentos
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/c82ab099-2ec4-4aa9-bd29-e7bf9e3a0963) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- [shadcn/ui](https://ui.shadcn.com/) pelos componentes incríveis
+- [Tailwind CSS](https://tailwindcss.com/) pelo framework CSS
+- [Vite](https://vitejs.dev/) pela ferramenta de build 
