@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FileText, ArrowLeft, Download } from "lucide-react";
@@ -7,6 +6,7 @@ import ResumeForm from "@/components/ResumeForm";
 import ResumePreview from "@/components/ResumePreview";
 import DownloadButton from "@/components/DownloadButton";
 import { ResumeData } from "@/types/resume";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
 const initialResumeData: ResumeData = {
   personalInfo: {
@@ -24,6 +24,16 @@ const initialResumeData: ResumeData = {
 
 const Criar = () => {
   const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
+  const [showClearModal, setShowClearModal] = useState(false);
+
+  const handleAfterDownload = () => {
+    setShowClearModal(true);
+  };
+
+  const handleClear = () => {
+    setResumeData(initialResumeData);
+    setShowClearModal(false);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -49,7 +59,7 @@ const Criar = () => {
               </div>
             </div>
             <div className="hidden md:block">
-              <DownloadButton resumeData={resumeData} />
+              <DownloadButton resumeData={resumeData} onAfterDownload={handleAfterDownload} />
             </div>
           </div>
         </div>
@@ -96,13 +106,28 @@ const Criar = () => {
         </div>
 
         {/* Mobile Download Button */}
-        <div className="lg:hidden mt-8">
-          <div className="bg-card rounded-lg border border-border p-6 text-center">
-            <h3 className="text-lg font-medium text-foreground mb-4">Gostou do resultado?</h3>
-            <DownloadButton resumeData={resumeData} />
-          </div>
+        <div className="block md:hidden mt-8 text-center">
+          <DownloadButton resumeData={resumeData} onAfterDownload={handleAfterDownload} />
         </div>
       </main>
+
+      {/* Modal de confirmação */}
+      <Dialog open={showClearModal} onOpenChange={setShowClearModal}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Deseja limpar seus dados?</DialogTitle>
+          </DialogHeader>
+          <p>Após baixar o PDF, você pode limpar os dados do formulário para sua privacidade.</p>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowClearModal(false)}>
+              Não, manter dados
+            </Button>
+            <Button variant="destructive" onClick={handleClear}>
+              Sim, limpar tudo
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

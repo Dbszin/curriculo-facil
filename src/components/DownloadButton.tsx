@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { ResumeData } from "@/types/resume";
@@ -7,9 +6,10 @@ import { toast } from "@/components/ui/use-toast";
 
 interface DownloadButtonProps {
   resumeData: ResumeData;
+  onAfterDownload?: () => void;
 }
 
-const DownloadButton = ({ resumeData }: DownloadButtonProps) => {
+const DownloadButton = ({ resumeData, onAfterDownload }: DownloadButtonProps) => {
   const handleDownload = async () => {
     if (!resumeData.personalInfo.fullName) {
       toast({
@@ -26,6 +26,7 @@ const DownloadButton = ({ resumeData }: DownloadButtonProps) => {
         title: "Sucesso!",
         description: "Seu currículo foi baixado com sucesso",
       });
+      if (onAfterDownload) onAfterDownload();
     } catch (error) {
       console.error("Erro ao gerar PDF:", error);
       toast({
