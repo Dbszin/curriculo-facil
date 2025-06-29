@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { ResumeData } from "@/types/resume";
-import { exportToPDF } from "@/utils/exportToPDF";
+import { exportToPDFATSDirect } from "@/utils/exportToPDF";
 import { toast } from "@/components/ui/use-toast";
 
 interface DownloadButtonProps {
@@ -21,10 +21,10 @@ const DownloadButton = ({ resumeData, onAfterDownload }: DownloadButtonProps) =>
     }
 
     try {
-      await exportToPDF(resumeData);
+      await exportToPDFATSDirect(resumeData);
       toast({
         title: "Sucesso!",
-        description: "Seu currículo foi baixado com sucesso",
+        description: "Seu currículo ATS foi baixado com sucesso",
       });
       if (onAfterDownload) onAfterDownload();
     } catch (error) {
@@ -40,7 +40,7 @@ const DownloadButton = ({ resumeData, onAfterDownload }: DownloadButtonProps) =>
   return (
     <Button onClick={handleDownload} size="lg" className="font-semibold">
       <Download className="h-5 w-5 mr-2" />
-      Baixar Currículo em PDF
+      Baixar Currículo ATS
     </Button>
   );
 };

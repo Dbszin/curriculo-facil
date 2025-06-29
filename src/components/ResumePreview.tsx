@@ -1,4 +1,3 @@
-
 import { ResumeData } from "@/types/resume";
 
 interface ResumePreviewProps {
@@ -20,11 +19,11 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
     return year || "";
   };
 
-  // Estilos inline para garantir que sejam capturados no PDF
+  // Estilos inline otimizados para ATS - apenas fontes padrão
   const containerStyle = {
     backgroundColor: '#ffffff',
     color: '#000000',
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: 'Arial, Helvetica, sans-serif',
     fontSize: '12px',
     lineHeight: '1.4',
     padding: '20px',
@@ -42,19 +41,22 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
     fontSize: '24px',
     fontWeight: 'bold',
     color: '#000000',
-    marginBottom: '8px'
+    marginBottom: '8px',
+    fontFamily: 'Arial, Helvetica, sans-serif'
   };
 
   const positionStyle = {
     fontSize: '16px',
     color: '#000000',
-    marginBottom: '10px'
+    marginBottom: '10px',
+    fontFamily: 'Arial, Helvetica, sans-serif'
   };
 
   const contactStyle = {
     fontSize: '12px',
     color: '#000000',
-    marginBottom: '5px'
+    marginBottom: '5px',
+    fontFamily: 'Arial, Helvetica, sans-serif'
   };
 
   const sectionTitleStyle = {
@@ -64,38 +66,43 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
     marginTop: '20px',
     marginBottom: '10px',
     borderBottom: '1px solid #000000',
-    paddingBottom: '5px'
+    paddingBottom: '5px',
+    fontFamily: 'Arial, Helvetica, sans-serif'
   };
 
   const contentStyle = {
     fontSize: '12px',
     color: '#000000',
-    marginBottom: '15px'
+    marginBottom: '15px',
+    fontFamily: 'Arial, Helvetica, sans-serif'
   };
 
   const jobTitleStyle = {
     fontSize: '14px',
     fontWeight: 'bold',
     color: '#000000',
-    marginBottom: '5px'
+    marginBottom: '5px',
+    fontFamily: 'Arial, Helvetica, sans-serif'
   };
 
   const companyStyle = {
     fontSize: '12px',
     fontWeight: 'bold',
     color: '#000000',
-    marginBottom: '3px'
+    marginBottom: '3px',
+    fontFamily: 'Arial, Helvetica, sans-serif'
   };
 
   const dateStyle = {
     fontSize: '11px',
     color: '#666666',
     fontStyle: 'italic',
-    marginBottom: '8px'
+    marginBottom: '8px',
+    fontFamily: 'Arial, Helvetica, sans-serif'
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-2xl mx-auto">
+    <div>
       <div id="resume-preview" style={containerStyle}>
         {/* Header */}
         <div style={headerStyle}>
@@ -229,7 +236,8 @@ const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
             textAlign: 'center', 
             padding: '50px 0', 
             color: '#666666',
-            fontSize: '14px'
+            fontSize: '14px',
+            fontFamily: 'Arial, Helvetica, sans-serif'
           }}>
             Preencha os dados no formulário para ver seu currículo aqui
           </div>
