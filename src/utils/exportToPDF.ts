@@ -3,7 +3,7 @@ import { ResumeData } from '@/types/resume';
 
 export const exportToPDF = async (resumeData: ResumeData): Promise<void> => {
   const element = document.getElementById('resume-preview');
-  
+
   if (!element) {
     throw new Error('Elemento de preview não encontrado');
   }
@@ -12,26 +12,13 @@ export const exportToPDF = async (resumeData: ResumeData): Promise<void> => {
   const opt = {
     margin: [0.5, 0.5, 0.5, 0.5],
     filename: `curriculo-${resumeData.personalInfo.fullName.replace(/\s+/g, '-').toLowerCase()}.pdf`,
-    image: { 
-      type: 'jpeg', 
-      quality: 0.98 
+    image: {
+      type: 'jpeg',
+      quality: 0.98
     },
-    // Removendo html2canvas para preservar texto como texto real
-    // html2canvas: { 
-    //   scale: 2,
-    //   useCORS: true,
-    //   allowTaint: false,
-    //   backgroundColor: '#ffffff',
-    //   logging: false,
-    //   letterRendering: true,
-    //   width: element.scrollWidth,
-    //   height: element.scrollHeight,
-    //   scrollX: 0,
-    //   scrollY: 0
-    // },
-    jsPDF: { 
-      unit: 'in', 
-      format: 'a4', 
+    jsPDF: {
+      unit: 'in',
+      format: 'a4',
       orientation: 'portrait',
       compress: true,
       putOnlyUsedFonts: true
@@ -42,7 +29,7 @@ export const exportToPDF = async (resumeData: ResumeData): Promise<void> => {
     // Garantir que o elemento esteja visível antes da conversão
     element.style.display = 'block';
     element.style.visibility = 'visible';
-    
+
     // Forçar o uso de fontes padrão antes da conversão
     const allElements = element.querySelectorAll('*');
     allElements.forEach((el: any) => {
@@ -50,7 +37,7 @@ export const exportToPDF = async (resumeData: ResumeData): Promise<void> => {
         el.style.fontFamily = 'Arial, Helvetica, sans-serif';
       }
     });
-    
+
     await html2pdf().set(opt).from(element).save();
   } catch (error) {
     console.error('Erro ao gerar PDF:', error);
@@ -61,7 +48,7 @@ export const exportToPDF = async (resumeData: ResumeData): Promise<void> => {
 // Função otimizada para criar PDF ATS com texto real (não imagem)
 export const exportToPDFATS = async (resumeData: ResumeData): Promise<void> => {
   const element = document.getElementById('resume-preview');
-  
+
   if (!element) {
     throw new Error('Elemento de preview não encontrado');
   }
@@ -75,9 +62,9 @@ export const exportToPDFATS = async (resumeData: ResumeData): Promise<void> => {
   const opt = {
     margin: [0.5, 0.5, 0.5, 0.5],
     filename: `curriculo-ats-${resumeData.personalInfo.fullName.replace(/\s+/g, '-').toLowerCase()}.pdf`,
-    jsPDF: { 
-      unit: 'in', 
-      format: 'a4', 
+    jsPDF: {
+      unit: 'in',
+      format: 'a4',
       orientation: 'portrait'
     }
   };
@@ -86,7 +73,7 @@ export const exportToPDFATS = async (resumeData: ResumeData): Promise<void> => {
     // Garantir que o elemento esteja visível
     element.style.display = 'block';
     element.style.visibility = 'visible';
-    
+
     // Aplicar estilos ATS
     element.style.fontFamily = 'Arial, Helvetica, sans-serif';
     element.style.fontSize = '12px';
@@ -94,16 +81,16 @@ export const exportToPDFATS = async (resumeData: ResumeData): Promise<void> => {
     element.style.backgroundColor = '#ffffff';
     element.style.padding = '20px';
     element.style.margin = '0';
-    
+
     // Forçar renderização
     element.offsetHeight;
-    
+
     // Aguardar um pouco para garantir que o DOM foi atualizado
     await new Promise(resolve => setTimeout(resolve, 100));
-    
+
     // Gerar PDF com configuração mínima (preserva texto como texto)
     await html2pdf().set(opt).from(element).save();
-    
+
   } catch (error) {
     console.error('Erro ao gerar PDF ATS:', error);
     // Tentar fallback ainda mais simples
@@ -114,7 +101,7 @@ export const exportToPDFATS = async (resumeData: ResumeData): Promise<void> => {
 // Função de fallback mais simples SEM html2canvas
 const exportToPDFATSFallback = async (resumeData: ResumeData): Promise<void> => {
   const element = document.getElementById('resume-preview');
-  
+
   if (!element) {
     throw new Error('Elemento de preview não encontrado');
   }
@@ -122,9 +109,9 @@ const exportToPDFATSFallback = async (resumeData: ResumeData): Promise<void> => 
   const opt = {
     margin: [0.5, 0.5, 0.5, 0.5],
     filename: `curriculo-ats-${resumeData.personalInfo.fullName.replace(/\s+/g, '-').toLowerCase()}.pdf`,
-    jsPDF: { 
-      unit: 'in', 
-      format: 'a4', 
+    jsPDF: {
+      unit: 'in',
+      format: 'a4',
       orientation: 'portrait'
     }
   };
@@ -134,7 +121,7 @@ const exportToPDFATSFallback = async (resumeData: ResumeData): Promise<void> => 
     element.style.fontFamily = 'Arial, Helvetica, sans-serif';
     element.style.backgroundColor = '#ffffff';
     element.style.color = '#000000';
-    
+
     // Gerar PDF com configuração mínima
     await html2pdf().set(opt).from(element).save();
   } catch (error) {
@@ -148,7 +135,7 @@ export const exportToPDFATSDirect = async (resumeData: ResumeData): Promise<void
   try {
     // Importar jsPDF dinamicamente
     const { jsPDF } = await import('jspdf');
-    
+
     const doc = new jsPDF({
       unit: 'in',
       format: 'a4',
@@ -158,6 +145,8 @@ export const exportToPDFATSDirect = async (resumeData: ResumeData): Promise<void
     // Configurar fonte
     doc.setFont('helvetica');
     doc.setFontSize(12);
+    doc.setDrawColor(0);
+    doc.setLineWidth(0.01);
 
     let yPosition = 1; // Margem superior
     const lineHeight = 0.2;
@@ -185,11 +174,13 @@ export const exportToPDFATSDirect = async (resumeData: ResumeData): Promise<void
     if (resumeData.personalInfo.email) contactInfo.push(`Email: ${resumeData.personalInfo.email}`);
     if (resumeData.personalInfo.phone) contactInfo.push(`Telefone: ${resumeData.personalInfo.phone}`);
     if (resumeData.personalInfo.address) contactInfo.push(`Endereço: ${resumeData.personalInfo.address}`);
-    
+
     contactInfo.forEach(info => {
       doc.text(info, margin, yPosition);
       yPosition += lineHeight;
     });
+
+    doc.line(0.5, yPosition - 0.10, 8.5 - margin, yPosition - 0.10);
 
     yPosition += 0.2;
 
@@ -198,11 +189,14 @@ export const exportToPDFATSDirect = async (resumeData: ResumeData): Promise<void
       doc.setFontSize(12);
       doc.setFont('helvetica', 'bold');
       doc.text('RESUMO PROFISSIONAL', margin, yPosition);
-      yPosition += 0.2;
-      
+
+      doc.line(0.5, yPosition + 0.1, 8.5 - margin, yPosition + 0.1);
+
+      yPosition += 0.3;
+
       doc.setFont('helvetica', 'normal');
       const summaryLines = doc.splitTextToSize(resumeData.professionalSummary, 7.5);
-      summaryLines.forEach(line => {
+      summaryLines.forEach((line: string | string[]) => {
         doc.text(line, margin, yPosition);
         yPosition += lineHeight;
       });
@@ -214,7 +208,10 @@ export const exportToPDFATSDirect = async (resumeData: ResumeData): Promise<void
       doc.setFontSize(12);
       doc.setFont('helvetica', 'bold');
       doc.text('EXPERIÊNCIA PROFISSIONAL', margin, yPosition);
-      yPosition += 0.2;
+
+      doc.line(0.5, yPosition + 0.1, 8.5 - margin, yPosition + 0.1);
+
+      yPosition += 0.3;
 
       resumeData.experiences.forEach(exp => {
         doc.setFont('helvetica', 'bold');
@@ -230,15 +227,15 @@ export const exportToPDFATSDirect = async (resumeData: ResumeData): Promise<void
         const startDate = exp.startDate ? new Date(exp.startDate).getFullYear() : '';
         const endDate = exp.isCurrentJob ? 'Atual' : (exp.endDate ? new Date(exp.endDate).getFullYear() : '');
         const dateText = startDate && endDate ? `${startDate} - ${endDate}` : startDate;
-        
+
         if (dateText) {
-          doc.text(dateText, margin, yPosition);
+          doc.text(dateText.toString(), margin, yPosition);
           yPosition += lineHeight;
         }
 
         if (exp.description) {
           const descLines = doc.splitTextToSize(`• ${exp.description}`, 7.5);
-          descLines.forEach(line => {
+          descLines.forEach((line: string | string[]) => {
             doc.text(line, margin, yPosition);
             yPosition += lineHeight;
           });
@@ -252,7 +249,10 @@ export const exportToPDFATSDirect = async (resumeData: ResumeData): Promise<void
       doc.setFontSize(12);
       doc.setFont('helvetica', 'bold');
       doc.text('FORMAÇÃO ACADÊMICA', margin, yPosition);
-      yPosition += 0.2;
+
+      doc.line(0.5, yPosition + 0.1, 8.5 - margin, yPosition + 0.1);
+
+      yPosition += 0.3;
 
       resumeData.education.forEach(edu => {
         doc.setFont('helvetica', 'bold');
@@ -269,9 +269,9 @@ export const exportToPDFATSDirect = async (resumeData: ResumeData): Promise<void
         const startYear = edu.startDate ? new Date(edu.startDate).getFullYear() : '';
         const endYear = edu.isCurrentStudy ? 'Cursando' : (edu.endDate ? new Date(edu.endDate).getFullYear() : '');
         const yearText = startYear && endYear ? `${startYear} - ${endYear}` : startYear;
-        
+
         if (yearText) {
-          doc.text(yearText, margin, yPosition);
+          doc.text(yearText.toString(), margin, yPosition);
           yPosition += lineHeight;
         }
         yPosition += 0.1;
@@ -283,16 +283,19 @@ export const exportToPDFATSDirect = async (resumeData: ResumeData): Promise<void
       doc.setFontSize(12);
       doc.setFont('helvetica', 'bold');
       doc.text('COMPETÊNCIAS E HABILIDADES', margin, yPosition);
-      yPosition += 0.2;
+
+      doc.line(0.5, yPosition + 0.1, 8.5 - margin, yPosition + 0.1);
+
+      yPosition += 0.3;
 
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(10);
-      const skillsText = resumeData.skills.map(skill => 
+      const skillsText = resumeData.skills.map(skill =>
         `${skill.name || 'Habilidade'} (${skill.level})`
       ).join(' • ');
-      
+
       const skillsLines = doc.splitTextToSize(skillsText, 7.5);
-      skillsLines.forEach(line => {
+      skillsLines.forEach((line: string | string[]) => {
         doc.text(line, margin, yPosition);
         yPosition += lineHeight;
       });
