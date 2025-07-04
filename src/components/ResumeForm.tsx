@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Plus, Trash2 } from "lucide-react";
 import { ResumeData, Experience, Education, Skill } from "@/types/resume";
+import InputMask from "react-input-mask";
 
 interface ResumeFormProps {
   resumeData: ResumeData;
@@ -164,12 +164,19 @@ const ResumeForm = ({ resumeData, setResumeData }: ResumeFormProps) => {
               </div>
               <div>
                 <Label htmlFor="phone">Telefone</Label>
-                <Input
-                  id="phone"
+                <InputMask
+                  mask="(99) 9 9999-9999"
                   value={resumeData.personalInfo.phone}
                   onChange={(e) => updatePersonalInfo("phone", e.target.value)}
-                  placeholder="(11) 99999-9999"
-                />
+                >
+                  {(inputProps: any) => (
+                    <Input
+                      {...inputProps}
+                      id="phone"
+                      placeholder="(99) 9 9999-9999"
+                    />
+                  )}
+                </InputMask>
               </div>
             </div>
             <div>
@@ -198,7 +205,7 @@ const ResumeForm = ({ resumeData, setResumeData }: ResumeFormProps) => {
               value={resumeData.professionalSummary}
               onChange={(e) => updateProfessionalSummary(e.target.value)}
               placeholder="Descreva brevemente sua experiência e objetivos profissionais..."
-              rows={4}
+              rows={10}
             />
           </div>
         </CardContent>
@@ -228,14 +235,6 @@ const ResumeForm = ({ resumeData, setResumeData }: ResumeFormProps) => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label>Empresa</Label>
-                  <Input
-                    value={experience.company}
-                    onChange={(e) => updateExperience(experience.id, "company", e.target.value)}
-                    placeholder="Nome da empresa"
-                  />
-                </div>
-                <div>
                   <Label>Cargo</Label>
                   <Input
                     value={experience.position}
@@ -244,28 +243,66 @@ const ResumeForm = ({ resumeData, setResumeData }: ResumeFormProps) => {
                   />
                 </div>
                 <div>
-                  <Label>Data de Início</Label>
+                  <Label>Empresa</Label>
                   <Input
-                    type="month"
-                    value={experience.startDate}
-                    onChange={(e) => updateExperience(experience.id, "startDate", e.target.value)}
+                    value={experience.company}
+                    onChange={(e) => updateExperience(experience.id, "company", e.target.value)}
+                    placeholder="Nome da empresa"
                   />
                 </div>
                 <div>
-                  <Label>Data de Fim</Label>
-                  <Input
+                  <Label>Data de início</Label>
+                  {/* <Input
                     type="month"
-                    value={experience.endDate}
+                    value={experience.startDate}
+                    onChange={(e) => updateExperience(experience.id, "startDate", e.target.value)}
+                  /> */}
+
+                  <InputMask
+                    mask="99/9999"
+                    placeholder="11/2022"
+                    value={experience.startDate ?? ""}
+                    onChange={(e) => updateExperience(experience.id, "startDate", e.target.value)}
+                    maskChar={null}
+                  >
+                    {(inputProps: any) => (
+                      <Input
+                        {...inputProps}
+                        type="month"
+                        value={experience.startDate}
+                      />
+                    )}
+                  </InputMask>
+                </div>
+                <div>
+                  <Label>Data de fim</Label>
+                  <InputMask
+                    mask="99/9999"
+                    placeholder="11/2022"
+                    value={experience.endDate ?? ""}
                     onChange={(e) => updateExperience(experience.id, "endDate", e.target.value)}
+                    maskChar={null}
                     disabled={experience.isCurrentJob}
-                  />
+                  >
+                    {(inputProps: any) => (
+                      <Input
+                        {...inputProps}
+                        type="month"
+                        value={experience.endDate}
+                        disabled={experience.isCurrentJob}
+                      />
+                    )}
+                  </InputMask>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id={`current-${experience.id}`}
                   checked={experience.isCurrentJob}
-                  onCheckedChange={(checked) => updateExperience(experience.id, "isCurrentJob", checked)}
+                  onCheckedChange={(checked) => {
+                    updateExperience(experience.id, "endDate", checked ? "" : experience.endDate);
+                    updateExperience(experience.id, "isCurrentJob", checked);
+                  }}
                 />
                 <Label htmlFor={`current-${experience.id}`}>Trabalho atual</Label>
               </div>
@@ -332,30 +369,53 @@ const ResumeForm = ({ resumeData, setResumeData }: ResumeFormProps) => {
                 </div>
                 <div>
                   <Label>Ano de Início</Label>
-                  <Input
-                    type="number"
-                    value={education.startDate}
-                    onChange={(e) => updateEducation(education.id, "startDate", e.target.value)}
+                  <InputMask
+                    mask="9999"
                     placeholder="2020"
-                  />
+                    value={education.startDate ?? ""}
+                    onChange={(e) => updateEducation(education.id, "startDate", e.target.value)}
+                    maskChar={null}
+                    type="number"
+                  >
+                    {(inputProps: any) => (
+                      <Input
+                        {...inputProps}
+                        type="text"
+                        value={education.startDate}
+                      />
+                    )}
+                  </InputMask>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label>Ano de Conclusão</Label>
-                  <Input
-                    type="number"
-                    value={education.endDate}
-                    onChange={(e) => updateEducation(education.id, "endDate", e.target.value)}
+                  <InputMask
+                    mask="9999"
                     placeholder="2024"
+                    value={education.endDate ?? ""}
+                    onChange={(e) => updateEducation(education.id, "endDate", e.target.value)}
+                    maskChar={null}
                     disabled={education.isCurrentStudy}
-                  />
+                  >
+                    {(inputProps: any) => (
+                      <Input
+                        {...inputProps}
+                        type="text"
+                        value={education.endDate}
+                        disabled={education.isCurrentStudy}
+                      />
+                    )}
+                  </InputMask>
                 </div>
                 <div className="flex items-center space-x-2 pt-6">
                   <Checkbox
                     id={`current-study-${education.id}`}
                     checked={education.isCurrentStudy}
-                    onCheckedChange={(checked) => updateEducation(education.id, "isCurrentStudy", checked)}
+                    onCheckedChange={(checked) => {
+                      updateEducation(education.id, "endDate", checked ? "" : education.endDate); //TODO: meu chapa vc tem que rever seu update do estado do objeto ele sobrescreve as coisas de um jeito muito estranho arruma isso ai
+                      updateEducation(education.id, "isCurrentStudy", checked);
+                    }}
                   />
                   <Label htmlFor={`current-study-${education.id}`}>Cursando atualmente</Label>
                 </div>
