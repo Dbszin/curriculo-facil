@@ -67,7 +67,7 @@ const Criar = () => {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Form Section */}
           <div className="space-y-6">
             <div className="bg-card rounded-lg border border-border p-6">
@@ -85,7 +85,7 @@ const Criar = () => {
           </div>
 
           {/* Preview Section */}
-          <div className="space-y-6">
+          <div className="space-y-6 self-start">
             <div className="bg-card rounded-lg border border-border p-6">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-3">
@@ -98,7 +98,7 @@ const Criar = () => {
                   </div>
                 </div>
               </div>
-              <div className="sticky top-32">
+              <div className="sticky top-20">
                 <ResumePreview resumeData={resumeData} />
               </div>
             </div>
