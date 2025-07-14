@@ -7,19 +7,20 @@ interface ResumePreviewProps {
 const ResumePreview = ({ resumeData }: ResumePreviewProps) => {
   const formatDate = (dateString: string) => {
     if (!dateString) return "";
-    const [month, year] = dateString.split("/");
+    // Espera formato 'YYYY-MM'
+    const [year, month] = dateString.split("-");
     const monthNames = [
       "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
       "Jul", "Ago", "Set", "Out", "Nov", "Dez"
     ];
-    const monthName = monthNames[parseInt(month) - 1];
-
+    if (!month || !year) return dateString;
+    const monthIndex = parseInt(month, 10) - 1;
+    const monthName = monthNames[monthIndex];
     if (monthName === undefined) {
       console.error(`Mês inválido: ${month}`);
       return "Mês inválido";
     }
-
-    return `${monthNames[parseInt(month) - 1]} ${year}`;
+    return `${monthName} ${year}`;
   };
 
   const formatYearDate = (year: string) => {

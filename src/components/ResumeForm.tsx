@@ -252,47 +252,20 @@ const ResumeForm = ({ resumeData, setResumeData }: ResumeFormProps) => {
                 </div>
                 <div>
                   <Label>Data de início</Label>
-                  {/* <Input
+                  <Input
                     type="month"
                     value={experience.startDate}
                     onChange={(e) => updateExperience(experience.id, "startDate", e.target.value)}
-                  /> */}
-
-                  <InputMask
-                    mask="99/9999"
-                    placeholder="11/2022"
-                    value={experience.startDate ?? ""}
-                    onChange={(e) => updateExperience(experience.id, "startDate", e.target.value)}
-                    maskChar={null}
-                  >
-                    {(inputProps: any) => (
-                      <Input
-                        {...inputProps}
-                        type="month"
-                        value={experience.startDate}
-                      />
-                    )}
-                  </InputMask>
+                  />
                 </div>
                 <div>
                   <Label>Data de fim</Label>
-                  <InputMask
-                    mask="99/9999"
-                    placeholder="11/2022"
-                    value={experience.endDate ?? ""}
+                  <Input
+                    type="month"
+                    value={experience.endDate}
                     onChange={(e) => updateExperience(experience.id, "endDate", e.target.value)}
-                    maskChar={null}
                     disabled={experience.isCurrentJob}
-                  >
-                    {(inputProps: any) => (
-                      <Input
-                        {...inputProps}
-                        type="month"
-                        value={experience.endDate}
-                        disabled={experience.isCurrentJob}
-                      />
-                    )}
-                  </InputMask>
+                  />
                 </div>
               </div>
               <div className="flex items-center space-x-2">
